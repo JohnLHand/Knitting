@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Font Preview — Knitting App</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=EB+Garamond:ital,wght@0,400;0,500;1,400&family=Baskervville:ital@0;1&family=Palatino+Linotype:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream: #f7f3ee;
+    --warm-white: #faf8f5;
+    --ink: #2a2118;
+    --muted: #8a7f74;
+    --accent: #c4937a;
+    --rule: #e2d9d0;
+    --serif-mono: Georgia, 'Times New Roman', serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* Header */
+  .page-header {
+    background: var(--ink);
+    color: var(--cream);
+    padding: 3.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .page-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.02) 40px,
+      rgba(255,255,255,0.02) 41px
+    );
+  }
+
+  .page-header-inner {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .page-header .eyebrow {
+    font-family: var(--serif-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  .page-header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: 3rem;
+    line-height: 1.1;
+    color: var(--warm-white);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-header p {
+    font-family: Georgia, serif;
+    font-size: 0.95rem;
+    color: rgba(247,243,238,0.6);
+    max-width: 520px;
+    line-height: 1.6;
+  }
+
+  /* Layout */
+  .container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .section-label {
+    font-family: var(--serif-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  /* Font cards */
+  .font-grid {
+    display: grid;
+    gap: 2px;
+    margin-bottom: 5rem;
+  }
+
+  .font-card {
+    background: var(--warm-white);
+    padding: 2.5rem 3rem;
+    border: 1px solid var(--rule);
+    position: relative;
+    transition: border-color 0.2s;
+  }
+
+  .font-card:hover {
+    border-color: var(--accent);
+    z-index: 1;
+  }
+
+  .font-card .meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 1.5rem;
+  }
+
+  .font-card .font-name {
+    font-family: var(--serif-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .font-card .font-tag {
+    font-family: var(--serif-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 0.2em 0.6em;
+    border-radius: 2px;
+  }
+
+  .font-card .display-text {
+    margin-bottom: 1.25rem;
+  }
+
+  .font-card .ui-samples {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .ui-sample {
+    flex: 1;
+    min-width: 180px;
+  }
+
+  .ui-sample .label {
+    font-family: var(--serif-mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+
+  /* Cormorant Garamond */
+  .card-cormorant .heading { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 2.8rem; line-height: 1.1; color: var(--ink); }
+  .card-cormorant .subheading { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1.3rem; font-style: italic; color: var(--muted); margin-top: 0.4rem; }
+  .card-cormorant .nav { font-family: 'Cormorant Garamond', serif; font-weight: 500; font-size: 1rem; letter-spacing: 0.05em; color: var(--ink); }
+  .card-cormorant .body { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 1rem; line-height: 1.7; color: var(--ink); }
+  .card-cormorant .caption { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 0.875rem; color: var(--muted); }
+
+  /* EB Garamond */
+  .card-garamond .heading { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 2.8rem; line-height: 1.1; color: var(--ink); }
+  .card-garamond .subheading { font-family: 'EB Garamond', serif; font-weight: 400; font-size: 1.3rem; font-style: italic; color: var(--muted); margin-top: 0.4rem; }
+  .card-garamond .nav { font-family: 'EB Garamond', serif; font-size: 1rem; letter-spacing: 0.03em; color: var(--ink); }
+  .card-garamond .body { font-family: 'EB Garamond', serif; font-size: 1rem; line-height: 1.7; color: var(--ink); }
+  .card-garamond .caption { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.875rem; color: var(--muted); }
+
+  /* Baskervville */
+  .card-baskerville .heading { font-family: 'Baskervville', serif; font-weight: 400; font-size: 2.5rem; line-height: 1.1; color: var(--ink); }
+  .card-baskerville .subheading { font-family: 'Baskervville', serif; font-weight: 400; font-size: 1.25rem; font-style: italic; color: var(--muted); margin-top: 0.4rem; }
+  .card-baskerville .nav { font-family: 'Baskervville', serif; font-size: 1rem; letter-spacing: 0.03em; color: var(--ink); }
+  .card-baskerville .body { font-family: 'Baskervville', serif; font-size: 1rem; line-height: 1.7; color: var(--ink); }
+  .card-baskerville .caption { font-family: 'Baskervville', serif; font-style: italic; font-size: 0.875rem; color: var(--muted); }
+
+  /* Georgia */
+  .card-georgia .heading { font-family: Georgia, serif; font-weight: 400; font-size: 2.5rem; line-height: 1.1; color: var(--ink); }
+  .card-georgia .subheading { font-family: Georgia, serif; font-weight: 400; font-size: 1.2rem; font-style: italic; color: var(--muted); margin-top: 0.4rem; }
+  .card-georgia .nav { font-family: Georgia, serif; font-size: 0.95rem; letter-spacing: 0.02em; color: var(--ink); }
+  .card-georgia .body { font-family: Georgia, serif; font-size: 0.95rem; line-height: 1.7; color: var(--ink); }
+  .card-georgia .caption { font-family: Georgia, serif; font-style: italic; font-size: 0.85rem; color: var(--muted); }
+
+  /* Palatino */
+  .card-palatino .heading { font-family: Palatino, 'Palatino Linotype', 'Book Antiqua', serif; font-weight: 400; font-size: 2.6rem; line-height: 1.1; color: var(--ink); }
+  .card-palatino .subheading { font-family: Palatino, 'Palatino Linotype', 'Book Antiqua', serif; font-weight: 400; font-size: 1.25rem; font-style: italic; color: var(--muted); margin-top: 0.4rem; }
+  .card-palatino .nav { font-family: Palatino, 'Palatino Linotype', 'Book Antiqua', serif; font-size: 1rem; letter-spacing: 0.02em; color: var(--ink); }
+  .card-palatino .body { font-family: Palatino, 'Palatino Linotype', 'Book Antiqua', serif; font-size: 1rem; line-height: 1.7; color: var(--ink); }
+  .card-palatino .caption { font-family: Palatino, 'Palatino Linotype', 'Book Antiqua', serif; font-style: italic; font-size: 0.875rem; color: var(--muted); }
+
+  /* Pairings section */
+  .pairings-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    margin-bottom: 5rem;
+  }
+
+  @media (max-width: 800px) {
+    .pairings-grid { grid-template-columns: 1fr; }
+    .font-card { padding: 2rem 1.5rem; }
+    .page-header { padding: 2.5rem 1.5rem; }
+    .container { padding: 3rem 1.25rem; }
+  }
+
+  .pairing-card {
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    padding: 2.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .pairing-card:hover { border-color: var(--accent); }
+
+  .pairing-label {
+    font-family: var(--serif-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+  }
+
+  .pairing-card .app-title {
+    margin-bottom: 0.5rem;
+  }
+
+  .pairing-card .app-subtitle {
+    margin-bottom: 1.5rem;
+  }
+
+  .pairing-card .app-nav {
+    display: flex;
+    gap: 1.5rem;
+    padding: 0.75rem 0;
+    border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.25rem;
+  }
+
+  .pairing-card .app-body {
+    margin-bottom: 0.75rem;
+  }
+
+  .pairing-card .app-caption {
+    display: block;
+  }
+
+  /* Pairing A: Cormorant + Georgia */
+  .pairing-a .app-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 2rem; line-height: 1.1; color: var(--ink); }
+  .pairing-a .app-subtitle { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--muted); }
+  .pairing-a .app-nav span { font-family: Georgia, serif; font-size: 0.85rem; color: var(--ink); }
+  .pairing-a .app-body { font-family: Georgia, serif; font-size: 0.9rem; line-height: 1.7; color: var(--ink); }
+  .pairing-a .app-caption { font-family: Georgia, serif; font-style: italic; font-size: 0.8rem; color: var(--muted); }
+
+  /* Pairing B: EB Garamond + Palatino */
+  .pairing-b .app-title { font-family: 'EB Garamond', serif; font-weight: 500; font-size: 2rem; line-height: 1.1; color: var(--ink); }
+  .pairing-b .app-subtitle { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.1rem; color: var(--muted); }
+  .pairing-b .app-nav span { font-family: Palatino, 'Palatino Linotype', serif; font-size: 0.85rem; color: var(--ink); }
+  .pairing-b .app-body { font-family: Palatino, 'Palatino Linotype', serif; font-size: 0.9rem; line-height: 1.7; color: var(--ink); }
+  .pairing-b .app-caption { font-family: Palatino, 'Palatino Linotype', serif; font-style: italic; font-size: 0.8rem; color: var(--muted); }
+
+  /* Pairing C: Cormorant Garamond 300 heading + Palatino body */
+  .pairing-c .app-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 2rem; line-height: 1.1; color: var(--ink); }
+  .pairing-c .app-subtitle { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-style: italic; font-size: 1.1rem; color: var(--muted); }
+  .pairing-c .app-nav span { font-family: Palatino, 'Palatino Linotype', serif; font-size: 0.85rem; color: var(--ink); }
+  .pairing-c .app-body { font-family: Palatino, 'Palatino Linotype', serif; font-size: 0.9rem; line-height: 1.7; color: var(--ink); }
+  .pairing-c .app-caption { font-family: Palatino, 'Palatino Linotype', serif; font-style: italic; font-size: 0.8rem; color: var(--muted); }
+
+  /* Footer note */
+  .footer-note {
+    padding: 2.5rem 3rem;
+    background: var(--warm-white);
+    border: 1px solid var(--rule);
+    font-family: Georgia, serif;
+    font-size: 0.875rem;
+    line-height: 1.7;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .footer-note strong {
+    font-style: normal;
+    color: var(--ink);
+    font-weight: normal;
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="page-header-inner">
+    <div class="eyebrow">Knitting App · Typography Preview</div>
+    <h1>Font Exploration</h1>
+    <p>Each typeface shown at display, navigation, body, and caption sizes — using real app copy.</p>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- Individual fonts -->
+  <div class="section-label">Individual Typefaces</div>
+
+  <div class="font-grid">
+
+    <!-- Cormorant Garamond -->
+    <div class="font-card card-cormorant">
+      <div class="meta">
+        <span class="font-name">Cormorant Garamond</span>
+        <span class="font-tag">Recommended · Free</span>
+      </div>
+      <div class="display-text">
+        <div class="heading">The Art of Fine Knitting</div>
+        <div class="subheading">Patterns for the considered maker</div>
+      </div>
+      <div class="ui-samples">
+        <div class="ui-sample">
+          <div class="label">Navigation</div>
+          <div class="nav">Patterns &nbsp;·&nbsp; My Projects &nbsp;·&nbsp; Library</div>
+        </div>
+        <div class="ui-sample">
+          <div class="label">Body Text</div>
+          <div class="body">Cast on 48 stitches using the long-tail method. Join to work in the round, being careful not to twist.</div>
+        </div>
+        <div class="ui-sample">
+          <div class="label">Caption</div>
+          <div class="caption">Fingering weight · 400m per 100g · Size 2.5mm needles</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EB Garamond -->
+    <div class="font-card card-garamond">
+      <div class="meta">
+        <span class="font-name">EB Garamond</span>
+        <span class="font-tag">Recommended · Free</span>
+      </div>
+      <div class="display-text">
+        <div class="heading">The Art of Fine Knitting</div>
+        <div class="subheading">Patterns for the considered maker</div>
+      </div>
+      <div class="ui-samples">
+        <div class="ui-sample">
+          <div class="label">Navigation</div>
+          <div class="nav">Patterns &nbsp;·&nbsp; My Projects &nbsp;·&nbsp; Library</div>
+        </div>
+        <div class="ui-sample">
+          <div class="label">Body Text</div>
+          <div class="body">Cast on 48 stitches using the long-tail method. Join to work in the round, being careful not to twist.</div>
+        </div>
+        <div class="ui-sample">
+          <div class="label">Caption</div>
+          <div class="caption">Fingering weight · 400m per 100g · Size 2.5mm needles</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Baskervville -->
+    <div class="font-card card-baskerville">
+      <div class="meta">
+        <span class="font-name">Baskervville</span>
+        <span class="font-tag">Free · More Structured</span>
+      </div>
+      <div class="display-text">
+        <div class="heading">The Art of Fine Knitting</div>
+        <div class="subheading">Patterns for the considered maker</div>
+      </div>
+      <div class="ui-samples">
+        <div class="ui-sample">
+          <div class="label">Navigation</div>
+          <div class="nav">Patterns &nbsp;·&nbsp; My Projects &nbsp;·&nbsp; Library</div>
+        </div>
+        <div class="ui-sample">
+          <div class="label">Body Text</div>
+          <div class="body">Cast on 48 stitches using the long-tail method. Join to work in the round, being careful not to twist.</div>
+        </div>
+        <div class="ui-sample">
+          <div class="label">Caption</div>
+          <div class="caption">Fingering weight · 400m per 100g · Size 2.5mm needles</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Georgia -->
+    <div class="font-card card-georgia">
+      <div class="meta">
+        <span class="font-name">Georgia</span>
+        <span class="font-tag">System Font · Most Readable</span>
+      </div>
+      <div class="display-text">
+        <div class="heading">The Art of Fine Knitting</div>
+        <div class="subheading">Patterns for the considered maker</div>
+      </div>
+      <div class="ui-samples">
+        <div class="ui-sample">
+          <div class="label">Navigation</div>
+          <div class="nav">Patterns &nbsp;·&nbsp; My Projects &nbsp;·&nbsp; Library</div>
+        </div>
+        <div class="ui-sample">
+          <div class="label">Body Text</div>
+          <div class="body">Cast on 48 stitches using the long-tail method. Join to work in the round, being careful not to twist.</div>
+        </div>
+        <div class="ui-sample">
+          <div class="label">Caption</div>
+          <div class="caption">Fingering weight · 400m per 100g · Size 2.5mm needles</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Palatino -->
+    <div class="font-card card-palatino">
+      <div class="meta">
+        <span class="font-name">Palatino</span>
+        <span class="font-tag">System Font · Most Warmth</span>
+      </div>
+      <div class="display-text">
+        <div class="heading">The Art of Fine Knitting</div>
+        <div class="subheading">Patterns for the considered maker</div>
+      </div>
+      <div class="ui-samples">
+        <div class="ui-sample">
+          <div class="label">Navigation</div>
+          <div class="nav">Patterns &nbsp;·&nbsp; My Projects &nbsp;·&nbsp; Library</div>
+        </div>
+        <div class="ui-sample">
+          <div class="label">Body Text</div>
+          <div class="body">Cast on 48 stitches using the long-tail method. Join to work in the round, being careful not to twist.</div>
+        </div>
+        <div class="ui-sample">
+          <div class="label">Caption</div>
+          <div class="caption">Fingering weight · 400m per 100g · Size 2.5mm needles</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Pairings -->
+  <div class="section-label">Recommended Pairings</div>
+
+  <div class="pairings-grid">
+
+    <div class="pairing-card pairing-a">
+      <div class="pairing-label">Pairing A — Ethereal</div>
+      <div class="app-title">Woolmark</div>
+      <div class="app-subtitle">Your pattern library</div>
+      <div class="app-nav">
+        <span>Discover</span>
+        <span>My Yarns</span>
+        <span>Projects</span>
+        <span>Profile</span>
+      </div>
+      <div class="app-body">A heritage merino worked at a fine gauge. The drape of this yarn lends itself beautifully to lace and delicate ribbing.</div>
+      <span class="app-caption">Heading: Cormorant Garamond 300 · Body: Georgia</span>
+    </div>
+
+    <div class="pairing-card pairing-b">
+      <div class="pairing-label">Pairing B — Grounded</div>
+      <div class="app-title">Woolmark</div>
+      <div class="app-subtitle">Your pattern library</div>
+      <div class="app-nav">
+        <span>Discover</span>
+        <span>My Yarns</span>
+        <span>Projects</span>
+        <span>Profile</span>
+      </div>
+      <div class="app-body">A heritage merino worked at a fine gauge. The drape of this yarn lends itself beautifully to lace and delicate ribbing.</div>
+      <span class="app-caption">Heading: EB Garamond 500 · Body: Palatino</span>
+    </div>
+
+    <div class="pairing-card pairing-c">
+      <div class="pairing-label">Pairing C — Refined</div>
+      <div class="app-title">Woolmark</div>
+      <div class="app-subtitle">Your pattern library</div>
+      <div class="app-nav">
+        <span>Discover</span>
+        <span>My Yarns</span>
+        <span>Projects</span>
+        <span>Profile</span>
+      </div>
+      <div class="app-body">A heritage merino worked at a fine gauge. The drape of this yarn lends itself beautifully to lace and delicate ribbing.</div>
+      <span class="app-caption">Heading: Cormorant Garamond 300 · Body: Palatino</span>
+    </div>
+
+  </div>
+
+  <!-- Note -->
+  <div class="footer-note">
+    <strong>Note on implementation:</strong> Cormorant Garamond and EB Garamond are available free via Google Fonts and work well in web and React Native apps. Georgia and Palatino are system fonts — no loading required, which improves performance on mobile. Baskervville is a free Google Fonts alternative to the premium Baskerville.
+  </div>
+
+</div>
+</body>
+</html>
