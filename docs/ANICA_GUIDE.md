@@ -77,4 +77,4 @@ No need to write an essay — just jot or tell me:
 - Does the **Gauge** idea seem useful to you, or not really?
 - Anything you wished it did?
 
-Thank you for being my first user. 💕
+Hey, first real step towards FINALLY building an app 🧶
