@@ -1,0 +1,223 @@
+/* ===== Handmade™ app prototype — brand palette ===== */
+:root {
+  --magenta: #CC2373;
+  --plum: #472136;
+  --silver: #D4D2D7;
+  --mauve: #783C59;
+  --dusty-rose: #A2929E;
+  --bg: #FBFAFB;
+  --white: #FFFFFF;
+  --radius: 16px;
+  --shadow: 0 2px 12px rgba(71, 33, 54, 0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  font-family: Helvetica, "Helvetica Neue", Arial, sans-serif;
+  background: var(--bg);
+  color: var(--plum);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  /* Leave room for the fixed header and bottom tab bar */
+  padding-top: env(safe-area-inset-top);
+  min-height: 100vh;
+}
+
+/* ---------- Header ---------- */
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--plum);
+  padding: 14px 20px;
+  padding-top: calc(14px + env(safe-area-inset-top));
+  text-align: center;
+}
+.wordmark {
+  color: var(--white);
+  font-weight: bold;
+  font-size: 20px;
+  letter-spacing: 0.3px;
+}
+
+/* ---------- Screens ---------- */
+#main {
+  padding: 20px 18px 96px; /* bottom padding clears the tab bar */
+  max-width: 640px;
+  margin: 0 auto;
+}
+.screen[hidden] { display: none; }
+
+.screen-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  min-height: 34px;
+}
+h1 { font-size: 26px; font-weight: bold; color: var(--plum); }
+.hint { color: var(--mauve); font-size: 14px; margin: 4px 0 18px; line-height: 1.4; }
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 12px 22px;
+  cursor: pointer;
+  transition: transform 0.08s ease, opacity 0.15s ease;
+}
+.btn:active { transform: scale(0.97); }
+.btn-primary { background: var(--magenta); color: var(--white); }
+.btn-secondary { background: var(--mauve); color: var(--white); }
+.btn-sm { padding: 8px 16px; font-size: 14px; }
+.btn-block { width: 100%; margin-top: 8px; padding: 15px; }
+
+.link-back {
+  background: none;
+  border: none;
+  color: var(--magenta);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* ---------- Cards ---------- */
+.card-list { display: flex; flex-direction: column; gap: 12px; }
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  cursor: pointer;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.card-thumb {
+  width: 56px; height: 56px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: var(--silver);
+  flex-shrink: 0;
+}
+.card-thumb.placeholder {
+  display: flex; align-items: center; justify-content: center;
+  font-size: 26px;
+}
+.card-body h3 { font-size: 17px; margin-bottom: 3px; }
+.card-body p { font-size: 13px; color: var(--dusty-rose); line-height: 1.35; }
+
+.empty {
+  text-align: center;
+  color: var(--dusty-rose);
+  padding: 48px 20px;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+/* ---------- Tags (patterns) ---------- */
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+.tag {
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--mauve);
+  background: var(--silver);
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+
+/* ---------- Forms ---------- */
+.field { display: block; margin-bottom: 16px; }
+.field > span {
+  display: block;
+  font-size: 13px;
+  font-weight: bold;
+  color: var(--mauve);
+  margin-bottom: 6px;
+}
+.field input {
+  width: 100%;
+  font-family: inherit;
+  font-size: 16px; /* 16px stops iOS auto-zoom on focus */
+  color: var(--plum);
+  background: var(--white);
+  border: 1.5px solid var(--silver);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+.field input:focus { outline: none; border-color: var(--magenta); }
+.field-row { display: flex; gap: 12px; }
+.field-row .field { flex: 1; }
+
+.photo-preview {
+  width: 100%;
+  max-height: 240px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+
+/* ---------- Filters ---------- */
+.filters { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; }
+.filter {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--plum);
+  background: var(--white);
+  border: 1.5px solid var(--silver);
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+.filter:focus { outline: none; border-color: var(--magenta); }
+
+/* ---------- Gauge result ---------- */
+.gauge-result { margin-top: 8px; display: flex; flex-direction: column; gap: 12px; }
+.gauge-card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px 18px;
+  border-left: 4px solid var(--magenta);
+}
+.gauge-card .needle { font-size: 22px; font-weight: bold; color: var(--magenta); }
+.gauge-card .detail { font-size: 14px; color: var(--mauve); margin-top: 4px; line-height: 1.4; }
+
+/* ---------- Tab bar ---------- */
+.tab-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 10;
+  display: flex;
+  background: var(--white);
+  border-top: 1px solid var(--silver);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--dusty-rose);
+  padding: 10px 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+.tab-icon { font-size: 20px; filter: grayscale(0.4); }
+.tab.is-active { color: var(--magenta); }
+.tab.is-active .tab-icon { filter: none; }

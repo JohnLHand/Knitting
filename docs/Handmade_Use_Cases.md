@@ -1,8 +1,8 @@
-# LooseLoop — Use Cases
+# Handmade™ — Use Cases
 
 > Your knitting and crochet life, beautifully organized.
 
-LooseLoop brings together everything you need to knit and crochet in peace: row counting, yarn stash tracking, project management, and thoughtful tools designed by crafters who get it.
+Handmade™ brings together everything you need to knit and crochet in peace: row counting, yarn stash tracking, project management, and thoughtful tools designed by crafters who get it.
 
 ---
 
@@ -106,6 +106,6 @@ LooseLoop brings together everything you need to knit and crochet in peace: row 
 
 ## Made for Real Crafting Life
 
-Whether you're on your first scarf, your first granny square, or your fiftieth sweater, LooseLoop grows with you. Pick up exactly where you left off — even months later.
+Whether you're on your first scarf, your first granny square, or your fiftieth sweater, Handmade™ grows with you. Pick up exactly where you left off — even months later.
 
 

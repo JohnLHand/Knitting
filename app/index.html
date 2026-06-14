@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Handmade&trade;</title>
+  <!-- Make it feel like a real app when added to the iPhone home screen -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Handmade">
+  <meta name="theme-color" content="#472136">
+  <link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+  <!-- ===== App header ===== -->
+  <header class="app-header">
+    <span class="wordmark">Handmade&trade;</span>
+  </header>
+
+  <!-- ===== Main scroll area: one <section> per screen ===== -->
+  <main id="main">
+
+    <!-- ---------- PROJECTS (home) ---------- -->
+    <section class="screen" data-view="projects">
+      <div class="screen-head">
+        <h1>Your Projects</h1>
+        <button class="btn btn-primary btn-sm" data-action="new-project">+ New</button>
+      </div>
+      <div id="projects-list" class="card-list"></div>
+    </section>
+
+    <!-- ---------- NEW PROJECT + SWATCH ---------- -->
+    <section class="screen" data-view="new-project" hidden>
+      <div class="screen-head">
+        <button class="link-back" data-action="back-to-projects">‹ Projects</button>
+      </div>
+      <h1 id="project-form-title">New Project</h1>
+      <p class="hint">Add your swatch so Handmade can learn your gauge over time.</p>
+
+      <form id="project-form">
+        <label class="field">
+          <span>Project name</span>
+          <input type="text" name="name" placeholder="e.g. Autumn Cardigan" required>
+        </label>
+
+        <label class="field">
+          <span>Swatch photo</span>
+          <input type="file" name="photo" accept="image/*" capture="environment">
+        </label>
+        <img id="photo-preview" class="photo-preview" alt="" hidden>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Stitches / 10 cm</span>
+            <input type="number" name="stitches" inputmode="decimal" step="0.5" placeholder="22">
+          </label>
+          <label class="field">
+            <span>Rows / 10 cm</span>
+            <input type="number" name="rows" inputmode="decimal" step="0.5" placeholder="30">
+          </label>
+        </div>
+
+        <div class="field-row">
+          <label class="field">
+            <span>Yarn used</span>
+            <input type="text" name="yarn" placeholder="e.g. Sandnes Sunday">
+          </label>
+          <label class="field">
+            <span>Needle (mm)</span>
+            <input type="number" name="needle" inputmode="decimal" step="0.25" placeholder="3.5">
+          </label>
+        </div>
+
+        <button type="submit" id="project-submit" class="btn btn-primary btn-block">Save Project</button>
+      </form>
+    </section>
+
+    <!-- ---------- PROJECT DETAIL ---------- -->
+    <section class="screen" data-view="project-detail" hidden>
+      <div class="screen-head">
+        <button class="link-back" data-action="back-to-projects">‹ Projects</button>
+      </div>
+      <div id="project-detail"></div>
+    </section>
+
+    <!-- ---------- PATTERNS + FILTERING ---------- -->
+    <section class="screen" data-view="patterns" hidden>
+      <div class="screen-head">
+        <h1>Patterns</h1>
+        <button class="btn btn-secondary btn-sm" data-action="new-pattern">+ Add</button>
+      </div>
+
+      <div class="filters">
+        <select id="filter-category" class="filter">
+          <option value="">All categories</option>
+        </select>
+        <select id="filter-needle" class="filter">
+          <option value="">Any needle</option>
+        </select>
+        <select id="filter-yarn" class="filter">
+          <option value="">Any yarn type</option>
+        </select>
+      </div>
+
+      <div id="patterns-list" class="card-list"></div>
+    </section>
+
+    <!-- ---------- GAUGE LOOKUP ---------- -->
+    <section class="screen" data-view="gauge" hidden>
+      <h1>Gauge Lookup</h1>
+      <p class="hint">See what needle gave you the right gauge last time you used a yarn.</p>
+
+      <label class="field">
+        <span>Which yarn?</span>
+        <input type="text" id="gauge-yarn" list="yarn-options" placeholder="Start typing a yarn name">
+        <datalist id="yarn-options"></datalist>
+      </label>
+
+      <div id="gauge-result" class="gauge-result"></div>
+    </section>
+
+  </main>
+
+  <!-- ===== Bottom tab bar ===== -->
+  <nav class="tab-bar">
+    <button class="tab is-active" data-tab="projects">
+      <span class="tab-icon">🧶</span><span>Projects</span>
+    </button>
+    <button class="tab" data-tab="patterns">
+      <span class="tab-icon">📐</span><span>Patterns</span>
+    </button>
+    <button class="tab" data-tab="gauge">
+      <span class="tab-icon">📏</span><span>Gauge</span>
+    </button>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

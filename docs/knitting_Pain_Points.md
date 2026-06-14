@@ -1,8 +1,8 @@
-# LooseLoop — Pain Points & Problem Statements
+# Handmade™ — Pain Points & Problem Statements
 
 > Every Knitter's Nightmare...
 
-These are the core user pain points that LooseLoop addresses — the frustrations crafters face today that create the market opportunity for a unified crafting companion app.
+These are the core user pain points that Handmade™ addresses — the frustrations crafters face today that create the market opportunity for a unified crafting companion app.
 
 ---
 

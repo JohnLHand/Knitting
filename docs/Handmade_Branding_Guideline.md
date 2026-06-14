@@ -1,8 +1,8 @@
-# LooseLoop — Branding Guideline: Design Philosophy
+# Handmade™ — Branding Guideline: Design Philosophy
 
 > Everything you need. In one cozy home.
 
-LooseLoop's design identity is built around a **calming, beautiful experience** — craft-inspired colours, soft shapes, and delightful moments throughout the UI. The app should feel like picking up your favourite project on a quiet evening, not like navigating enterprise software.
+Handmade's design identity is built around a **calming, beautiful experience** — craft-inspired colours, soft shapes, and delightful moments throughout the UI. The app should feel like picking up your favourite project on a quiet evening, not like navigating enterprise software.
 
 ---
 
